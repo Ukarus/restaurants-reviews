@@ -20,7 +20,7 @@ class Restaurant extends Model
     {
         $reviews = $this->reviews;
         return Attribute::make(
-            get: fn($i) => $reviews->pluck('stars')->avg() 
+            get: fn($i) => round($reviews->pluck('stars')->avg(),1)
         );
     }
 }

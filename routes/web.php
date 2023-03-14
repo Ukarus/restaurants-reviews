@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReviewsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/{restaurant}/reviews', [HomeController::class, 'show'])->name('reviews.index');
+Route::post('/reviews/store', [ReviewsController::class, 'store'])->name('reviews.store');
