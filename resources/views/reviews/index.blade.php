@@ -91,6 +91,15 @@
   </div>
 
   <div class="row mb-4 ">
+    @guest
+    <div class="col">
+      You need to <a href="{{ route('register') }}">Sign in</a> to write reviews
+
+    </div>
+    @endguest
+
+
+    @auth
     <form action="{{ route('reviews.store') }}" method="post">
       @csrf
       <input type="hidden" name="restaurant_id" value="{{ $restaurant->id }}">
@@ -122,6 +131,7 @@
 
       <button type="submit" class="btn btn-primary">Post a review</button>
     </form>
+    @endauth
   </div>
 
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
