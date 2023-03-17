@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,10 +17,12 @@ class ReviewFactory extends Factory
      */
     public function definition(): array
     {
+        $u = User::factory()->create();
         return [
+            'user_id' => $u->id,
             'review' => fake()->text(),
-            'author' => fake()->name(),
-            'stars' => rand(1, 5)
+            'author' => $u->name,
+            'stars' => rand(1, 5),
         ];
     }
 }

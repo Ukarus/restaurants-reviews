@@ -100,37 +100,81 @@
 
 
     @auth
-    <form action="{{ route('reviews.store') }}" method="post">
-      @csrf
-      <input type="hidden" name="restaurant_id" value="{{ $restaurant->id }}">
-      
-      <div class="col-3 my-3">
-        <label for="name" class="form-label">Name:</label>
-        <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
-      </div>
+      @if ($review != null)
+      <!-- {{ $review }} -->
+        <form action="{{ route('reviews.update', $review) }}" method="post">
+          @csrf
+          @method('put')
 
-      <label class="rating-label">
-        <strong>Rating</strong>
-        <input
-          name="rating"
-          class="rating"
-          max="5"
-          oninput="this.style.setProperty('--value', this.value)"
-          step="0.5"
-          type="range"
-          value="1">
-      </label>
+          <div class="col-3 my-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" class="form-control" id="name" value="{{ $user->name }}" disabled placeholder="Enter name" name="name">
+          </div>
+
+          <label class="rating-label">
+            <strong>Rating</strong>
+            <input
+              style="--value:{{ $review->stars }};"
+              id="stars"
+              name="stars"
+              class="rating"
+              max="5"
+              oninput="this.style.setProperty('--value', this.value)"
+              step="0.5"
+              type="range"
+              value="{{ $review->stars }}">
+          </label>
 
 
 
-      <div class="col-12 mb-3">
-        <textarea name="review" id="review"  class="form-control" placeholder="Write your review here">
-        {{ old('review') }}
-        </textarea>
-      </div>
+          <div class="col-12 mb-3">
+            <textarea name="review" id="review"  class="form-control" placeholder="Write your review here">
+            {{ $review->review }}
+            </textarea>
+          </div>
 
-      <button type="submit" class="btn btn-primary">Post a review</button>
-    </form>
+          <button type="submit" class="btn btn-warning">Update your review</button>
+        </form>
+        
+        <form action="{{ route('reviews.destroy', $review) }}" method="post" class="my-2">
+          @method('delete')
+          @csrf
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+
+      @else
+        <form action="{{ route('reviews.store') }}" method="post">
+          @csrf
+          <input type="hidden" name="restaurant_id" value="{{ $restaurant->id }}">
+          
+          <div class="col-3 my-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" class="form-control" id="name" value="{{ $user->name }}" disabled placeholder="Enter name" name="name">
+          </div>
+
+          <label class="rating-label">
+            <strong>Rating</strong>
+            <input
+              
+              name="rating"
+              class="rating"
+              max="5"
+              oninput="this.style.setProperty('--value', this.value)"
+              step="0.5"
+              type="range"
+              value="1">
+          </label>
+
+
+
+          <div class="col-12 mb-3">
+            <textarea name="review" id="review"  class="form-control" placeholder="Write your review here">
+            </textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Post a review</button>
+        </form>
+      @endif
     @endauth
   </div>
 
@@ -149,4 +193,17 @@
     @endforeach
   </div>
 </div>
+
+<script>
+
+  // const review = {{ Js::from($review) }};
+  // console.log(review);
+  // @if ($review != null)
+  //   let review = {{ Js::from($review) }};
+  //   console.log(review);
+  //   document.getElementById('rating').style.setProperty('--value', review.stars );
+  // @endif
+
+</script>
+
 @endsection

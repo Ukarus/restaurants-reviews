@@ -18,11 +18,5 @@ class DatabaseSeeder extends Seeder
         Restaurant::factory(10)
         ->has(Review::factory()->count(5))
         ->create();
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
     }
 }

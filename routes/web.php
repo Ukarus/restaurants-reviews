@@ -19,10 +19,8 @@ use App\Http\Controllers\ReviewsController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/{restaurant}/reviews', [HomeController::class, 'show'])->name('reviews.index');
 Route::post('/reviews/store', [ReviewsController::class, 'store'])->name('reviews.store');
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::put('/reviews/{review}', [ReviewsController::class, 'update'])->name('reviews.update');
+Route::delete('/reviews/{review}', [ReviewsController::class, 'destroy'])->name('reviews.destroy');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

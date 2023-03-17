@@ -23,4 +23,6 @@ class Restaurant extends Model
             get: fn($i) => round($reviews->pluck('stars')->avg(),1)
         );
     }
+
+ 
 }

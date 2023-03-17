@@ -16,7 +16,7 @@
         @endguest
 
         @auth
-        <div>{{ Auth::user()->name }}</div>
+        <div>Logged in as: {{ Auth::user()->name }}</div>
           <!-- Authentication -->
           <form method="POST" action="{{ route('logout') }}">
             @csrf
