@@ -14,7 +14,6 @@ class HomeController extends Controller
     public function index(): View
     {
         $restaurants = Restaurant::with(['reviews'])->get();
-        // dd($restaurants);
         return view('home', [
             'restaurants' => $restaurants
         ]);
@@ -22,13 +21,14 @@ class HomeController extends Controller
 
     public function show(Restaurant $restaurant, Request $request): View
     {
-        // dd(Auth::user()->hasReviewForRestaurant($restaurant->id));
         $user = $request->user();
-        $user->load('reviews');
+        $review = null;
+        if ($user != null) {
+            $user->load('reviews');
+            $review = $user->reviews()->where('user_id', $user->id)->get()->first();
+        }
         $restaurant->load('reviews');
 
-        $review = $user->reviews()->where('user_id', $user->id)->get()->first();
-        // dd($review);
         return view('reviews.index', [
             'restaurant' => $restaurant,
             'user' => $user,

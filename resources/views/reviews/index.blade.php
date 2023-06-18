@@ -70,16 +70,15 @@
 </style>
 
 
-<section class="container">
-  <div class="p-5 bg-primary text-white text-center rounded">
-    <h1 class="fw-light ">{{ $restaurant->name }}</h1>
-    <img src="{{ $restaurant->photo }}" alt="Restaurant photo" class="d-block mx-auto my-1 w-25 h-25" >
-    <!-- <p class="fw-light carousel-caption">{{ $restaurant->name }}</p> -->
-    <x-stars-review :avg-stars='$restaurant->avg_stars' />
-    <p class="text-white">{{ $restaurant->address }}</p>
-  </div>
+<section class="container-fluid py-4 bg-primary text-white text-center rounded">
+  <h1 class="fw-light ">{{ $restaurant->name }}</h1>
+  <img src="{{ $restaurant->photo }}" alt="Restaurant photo" class="d-block mx-auto my-1 w-25 h-25" >
+  <!-- <p class="fw-light carousel-caption">{{ $restaurant->name }}</p> -->
+  <x-stars-review :avg-stars='$restaurant->avg_stars' />
+  <p class="text-white">{{ $restaurant->address }}</p>
 
 </section>
+
 <div class="container">
   <div class="row">
     <nav aria-label="breadcrumb">
@@ -194,16 +193,5 @@
   </div>
 </div>
 
-<script>
-
-  // const review = {{ Js::from($review) }};
-  // console.log(review);
-  // @if ($review != null)
-  //   let review = {{ Js::from($review) }};
-  //   console.log(review);
-  //   document.getElementById('rating').style.setProperty('--value', review.stars );
-  // @endif
-
-</script>
 
 @endsection
